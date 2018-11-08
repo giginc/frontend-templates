@@ -1,0 +1,13 @@
+@import "../utils/**";
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.body {
+  font-family: $base-font-stack;
+}
+
+@import "../components/**";
