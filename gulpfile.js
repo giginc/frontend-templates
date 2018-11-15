@@ -50,7 +50,7 @@ const options = {
   MINIFY_CSS: true,
 };
 
-gulp.task('html-reload', ['html'], (done) => {
+gulp.task('html-reload', (done) => {
   browserSync.reload();
   done();
 });
