@@ -4,6 +4,7 @@ const watch = require('gulp-watch');
 const plumber = require('gulp-plumber');
 const sass = require('gulp-sass');
 const sassGlob = require('gulp-sass-glob');
+const pug = require('gulp-pug');
 const autoprefixer = require('gulp-autoprefixer');
 const webpack = require('webpack-stream');
 const browserSync = require('browser-sync').create();
@@ -46,13 +47,23 @@ const options = {
       ],
     },
   },
+  PUG: {
+    pretty: true
+  },
   MINIFY_JS: true,
   MINIFY_CSS: true,
 };
 
-gulp.task('html-reload', ['html'], (done) => {
+gulp.task('html-reload', ['pug'], (done) => {
   browserSync.reload();
   done();
+});
+
+gulp.task('pug', () => {
+  return gulp.src([`${options.SRC_PATH}/pug/entries/**/*.pug`, `!${options.SRC_PATH}/pug/**/_*.pug`])
+    .pipe(plumber())
+    .pipe(pug(options.PUG))
+    .pipe(gulp.dest(`${options.PUBLIC_PATH}/`));
 });
 
 gulp.task('js', () => {
@@ -77,7 +88,7 @@ gulp.task('scss', () => {
 });
 
 gulp.task('watch', () => {
-  watch([`${options.SRC_PATH}/**/*.html`], () => {
+  watch([`${options.SRC_PATH}/pug/**/*.pug`], () => {
     return gulp.start(['html-reload']);
   });
   watch([`${options.SRC_PATH}/js/**/*.js`], () => {
@@ -91,6 +102,7 @@ gulp.task('watch', () => {
 
 gulp.task('default', () => {
   runSequence(
+    'pug',
     'scss',
     'js',
     'watch'
@@ -128,6 +140,7 @@ gulp.task('minify:css', () => {
       .pipe(gulp.dest(`${options.BUILD_PATH}/assets/css`));
   }
 });
+
 
 gulp.task('build', () => {
   runSequence(

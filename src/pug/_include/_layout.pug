@@ -1,0 +1,25 @@
+block config
+	include ./__config
+
+
+block vars
+	- var pageKey = ""
+	- var pageTitle = ""
+
+
+doctype html
+html(lang="ja-jp" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#")
+	head
+		include ./_head
+
+	body
+		.wrap
+			include ./_header
+
+			main
+				block contents
+
+			include ./_footer
+
+		script(src=jsPath + "common.js")
+		script(src=jsPath + pageKey + ".js")
