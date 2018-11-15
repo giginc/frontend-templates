@@ -1,4 +1,4 @@
-# frontend-templates
+# frontend-templates [pug利用]
 
 GIG inc のフロントエンド用テンプレートです。
 
@@ -15,6 +15,7 @@ GIG inc のフロントエンド用テンプレートです。
 - scss
 - eslint(airbnb)
 - gulp.js
+- pug
 
 ## 開発を始める
 
@@ -39,9 +40,3 @@ CIサービスと連携してステージング環境へデプロイする
 ```
 $ npm run deploy
 ```
-
-## Todo
-
-- [ ] 各種テンプレートを用意する（simple, pug, ejs, wordpress, aquamarine）
-- [ ] コーディング規約をつくる
-- [ ] CLIツールをつくる
