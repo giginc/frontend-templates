@@ -1,10 +1,10 @@
 {
-  "name": "web-starter-kit",
-  "version": "2.0.0",
+  "name": "frontend-templates",
+  "version": "1.0.0",
   "description": "webpack4, babel, eslint(airbnb), scss, gulp",
   "main": "index.js",
-  "repository": "https://github.com/kokushin/web-starter-kit.git",
-  "author": "kokushin <mail@kokush.in>",
+  "repository": "https://github.com/giginc/frontend-templates.git",
+  "author": "giginc <info@giginc.co.jp>",
   "license": "MIT",
   "scripts": {
     "start": "gulp",
