@@ -1,0 +1,35 @@
+<%_
+  var
+    key = 'sample',
+    dirPath = '../'
+_%>
+
+<%- include(dirPath + 'components/_head', {
+  key: key,
+  title: 'Sample |' + config.default.title,
+}) %>
+
+<%- include(dirPath + 'components/_header') %>
+
+<main class="content">
+  <section class="section intro">
+    <div class="inner">
+      <h2 class="section__title">Sample page</h2>
+      <div class="intro__content">
+        <figure>
+          <img src="https://source.unsplash.com/random" width="400" alt="">
+        </figure>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, iure sapiente! Laborum iusto voluptates soluta culpa omnis. Magnam, adipisci voluptatum.</p>
+        <p><a href="../" class="button -primary">Back</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include(dirPath + 'components/_footer') %>
+
+<%- include(dirPath + 'components/_script', {
+  key: key,
+}) %>
+
+<%- include(dirPath + 'components/_foot') %>

@@ -1,0 +1,35 @@
+<%_
+  var
+    key = 'top', // ページの固有ID
+    dirPath = './' // ルートディレクトリへの相対パス
+_%>
+
+<%- include(dirPath + 'components/_head', {
+  key: key, // 固有IDを継承（data-page-keyの設定に使用）
+  title: null // タイトルの上書き
+}) %>
+
+<%- include(dirPath + 'components/_header') %>
+
+<main class="content">
+  <section class="section intro">
+    <div class="inner">
+      <h2 class="section__title">Section</h2>
+      <div class="intro__content">
+        <figure>
+          <img src="https://source.unsplash.com/random" width="400" alt="">
+        </figure>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, iure sapiente! Laborum iusto voluptates soluta culpa omnis. Magnam, adipisci voluptatum.</p>
+        <p><a href="/sample" class="button -primary">Sample page</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include(dirPath + 'components/_footer') %>
+
+<%- include(dirPath + 'components/_script', {
+  key: key, // 固有IDを継承（jsファイルの分岐に使用）
+}) %>
+
+<%- include(dirPath + 'components/_foot') %>

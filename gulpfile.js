@@ -1,7 +1,10 @@
 const gulp = require('gulp');
+const fs = require('fs');
 const del = require('del');
+const log = require('fancy-log');
 const watch = require('gulp-watch');
 const plumber = require('gulp-plumber');
+const ejs = require('gulp-ejs');
 const sass = require('gulp-sass');
 const sassGlob = require('gulp-sass-glob');
 const autoprefixer = require('gulp-autoprefixer');
@@ -25,10 +28,14 @@ const options = {
     ghostMode: false,
     notify: false,
   },
+  EJS: {
+    config: '_config.json',
+  },
   WEBPACK: {
     entry: {
       common: './src/js/entries/common.js',
       top: './src/js/entries/top.js',
+      sample: './src/js/entries/sample.js',
     },
     output: {
       filename: '[name].js',
@@ -50,7 +57,33 @@ const options = {
   MINIFY_CSS: true,
 };
 
-gulp.task('html-reload', ['html'], (done) => {
+gulp.task('ejs', () => {
+  const configFile = `${options.SRC_PATH}/ejs/${options.EJS.config}`;
+
+  fs.access(configFile, fs.R_OK | fs.W_OK, function (err) {
+    const config = (err) ? {} : JSON.parse(fs.readFileSync(configFile, 'utf8'));
+    return gulp.src(
+      [
+        `${options.SRC_PATH}/ejs/**/*.ejs`,
+        `!${options.SRC_PATH}/ejs/**/_*.ejs`,
+      ]
+    )
+      .pipe(plumber({
+        errorHandler: function (_err) {
+          log.error(_err);
+          this.emit('end');
+        }
+      }))
+      .pipe(ejs({
+        config: config,
+      }, {}, {
+          ext: '.html'
+        }))
+      .pipe(gulp.dest(`${options.PUBLIC_PATH}`));
+  });
+});
+
+gulp.task('html-reload', ['ejs'], (done) => {
   browserSync.reload();
   done();
 });
@@ -77,7 +110,10 @@ gulp.task('scss', () => {
 });
 
 gulp.task('watch', () => {
-  watch([`${options.SRC_PATH}/**/*.html`], () => {
+  watch([`${options.SRC_PATH}/ejs/**/*.ejs`], () => {
+    return gulp.start(['html-reload']);
+  });
+  watch([`${options.SRC_PATH}/ejs/${options.EJS.config}`], () => {
     return gulp.start(['html-reload']);
   });
   watch([`${options.SRC_PATH}/js/**/*.js`], () => {
@@ -91,6 +127,7 @@ gulp.task('watch', () => {
 
 gulp.task('default', () => {
   runSequence(
+    'ejs',
     'scss',
     'js',
     'watch'
