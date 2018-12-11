@@ -1,0 +1,15 @@
+{
+  "default": {
+    "lang": "ja",
+    "charset": "UTF-8",
+    "title": "Website",
+    "description": "",
+    "keywords": "",
+    "author": "",
+    "publicPath": "http://localhost:8080",
+    "analytics": "",
+    "twitter": "",
+    "facebook": "",
+    "instagram": ""
+  }
+}
