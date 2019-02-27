@@ -58,5 +58,6 @@ typings/
 .env
 
 dist
-public/assets
+public/assets/css
+public/assets/js
 .DS_Store
