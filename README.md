@@ -50,6 +50,10 @@ A. `src/js/entries`配下のjsファイルを編集・追加した後、`gulpfil
 
 A. `src/scss/entries`配下のscssファイルを編集・追加してください。
 
+### Q. 画像ファイルってどこに配置するの？
+
+A. `public/assets/img`配下に設置してください。
+
 ## Todo
 
 - [ ] 各種テンプレートを用意する（simple, pug, ejs, wordpress, aquamarine）
