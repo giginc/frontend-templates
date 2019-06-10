@@ -6,6 +6,9 @@
   "repository": "https://github.com/giginc/frontend-templates.git",
   "author": "giginc <info@giginc.co.jp>",
   "license": "MIT",
+  "browserslist": [
+    "last 2 version"
+  ],
   "scripts": {
     "start": "gulp",
     "dev": "npm start",
