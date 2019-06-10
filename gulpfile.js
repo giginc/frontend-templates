@@ -18,11 +18,9 @@ const options = {
   PUBLIC_PATH: './public',
   BUILD_PATH: './dist',
   AUTOPREFIXER: {
-    browsers: ['last 2 versions'],
     cascade: false,
   },
   BROWSERSYNC: {
-    open: false,
     server: './public',
     port: 3000,
     ghostMode: false,
