@@ -1,6 +1,5 @@
 const gulp = require('gulp');
 const del = require('del');
-const watch = require('gulp-watch');
 const plumber = require('gulp-plumber');
 const sass = require('gulp-sass');
 const sassGlob = require('gulp-sass-glob');
@@ -26,8 +25,19 @@ const options = {
     ghostMode: false,
     notify: false,
   },
+  IMAGEMIN: [
+    pngquant('65-80'),
+    mozjpeg({
+      quality: 85,
+      progressive: true,
+    }),
+    imagemin.svgo(),
+    imagemin.optipng(),
+    imagemin.gifsicle(),
+  ],
   MINIFY_JS: true,
   MINIFY_CSS: true,
+  MINIFY_IMG: true,
 };
 
 gulp.task('html-reload', (done) => {
@@ -53,9 +63,9 @@ gulp.task('scss', () => gulp.src(`${options.SRC_PATH}/scss/entries/**/*.scss`)
   .pipe(browserSync.stream()));
 
 gulp.task('watch', () => {
-  watch([`${options.SRC_PATH}/**/*.html`], () => gulp.start(['html-reload']));
-  watch([`${options.SRC_PATH}/js/**/*.js`], () => gulp.start(['js-reload']));
-  watch([`${options.SRC_PATH}/scss/**/*.scss`], () => gulp.start(['scss']));
+  gulp.watch([`${options.SRC_PATH}/**/*.html`], gulp.task('html-reload'));
+  gulp.watch([`${options.SRC_PATH}/js/**/*.js`], gulp.task('js-reload'));
+  gulp.watch([`${options.SRC_PATH}/scss/**/*.scss`], gulp.task('scss'));
   browserSync.init(options.BROWSERSYNC);
 });
 
@@ -85,25 +95,17 @@ gulp.task('minify:css', () => options.MINIFY_CSS && gulp
   .pipe(cssmin())
   .pipe(gulp.dest(`${options.BUILD_PATH}/assets/css`)));
 
+gulp.task('minify:img', () => options.MINIFY_IMG && gulp
+  .src(`${options.BUILD_PATH}/assets/img/*`)
+  .pipe(imagemin(options.IMAGEMIN, {
+    verbose: true,
+  }))
+  .pipe(gulp.dest(`${options.BUILD_PATH}/assets/img`)));
+
 gulp.task('build', gulp.series(
   'clean',
   'copy',
   'minify:js',
   'minify:css',
+  'minify:img',
 ));
-
-gulp.task('imagemin', () => gulp
-  .src(`${options.PUBLIC_PATH}/assets/img/*`)
-  .pipe(imagemin([
-    pngquant('65-80'),
-    mozjpeg({
-      quality: 85,
-      progressive: true,
-    }),
-    imagemin.svgo(),
-    imagemin.optipng(),
-    imagemin.gifsicle(),
-  ], {
-    verbose: true,
-  }))
-  .pipe(gulp.dest(`${options.BUILD_PATH}/assets/img`)));

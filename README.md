@@ -18,27 +18,19 @@ GIG inc のフロントエンド用テンプレートです。
 
 ## 開発を始める
 
-自動コンパイル&ローカルサーバの起動&ライブリロード
+`public`ディレクトリ配下の`index.html`を起点にローカルサーバが立ち上がります。  
+`localhost:3000`でアクセスすることができ、ライブリロード&js, scssファイルの自動コンパイルが有効になります。
 
 ```
 $ npm run dev
 ```
 
-## ビルドする
+## 納品用にビルドする
 
-css, jsファイルを最適化して出力
+`public/assets`配下のcss, jsファイルを圧縮して`dist/assets`へ出力します。
 
 ```
 $ npm run build
-```
-
-## 画像を圧縮する
-
-`public/assets/img`配下の画像ファイルを圧縮し、`dist/assets/img`に出力します。  
-圧縮率を変更したい場合はgulpfile.jsを編集してください。
-
-```
-$ npm run imagemin
 ```
 
 ## よくある質問
