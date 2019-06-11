@@ -32,12 +32,13 @@ css, jsファイルを最適化して出力
 $ npm run build
 ```
 
-## デプロイする（未実装）
+## 画像を圧縮する
 
-CIサービスと連携してステージング環境へデプロイする
+`public/assets/img`配下の画像ファイルを圧縮し、`dist/assets/img`に出力します。  
+圧縮率を変更したい場合はgulpfile.jsを編集してください。
 
 ```
-$ npm run deploy
+$ npm run imagemin
 ```
 
 ## よくある質問

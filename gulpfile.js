@@ -7,8 +7,10 @@ const sassGlob = require('gulp-sass-glob');
 const autoprefixer = require('gulp-autoprefixer');
 const webpack = require('webpack-stream');
 const browserSync = require('browser-sync').create();
-const runSequence = require('run-sequence');
 const cssmin = require('gulp-cssmin');
+const imagemin = require('gulp-imagemin');
+const pngquant = require('imagemin-pngquant');
+const mozjpeg = require('imagemin-mozjpeg');
 const webpackConfig = require('./webpack.config');
 
 const options = {
@@ -38,7 +40,7 @@ gulp.task('js', () => gulp.src(`${options.SRC_PATH}/js/entries/**/*.js`)
   .pipe(webpack(Object.assign({}, webpackConfig, { mode: 'development' })))
   .pipe(gulp.dest(`${options.PUBLIC_PATH}/assets/js`)));
 
-gulp.task('js-reload', ['js'], (done) => {
+gulp.task('js-reload', gulp.series('js'), (done) => {
   browserSync.reload();
   done();
 });
@@ -57,13 +59,11 @@ gulp.task('watch', () => {
   browserSync.init(options.BROWSERSYNC);
 });
 
-gulp.task('default', () => {
-  runSequence(
-    'scss',
-    'js',
-    'watch',
-  );
-});
+gulp.task('default', gulp.series(
+  'scss',
+  'js',
+  'watch',
+));
 
 gulp.task('clean', () => del([
   options.BUILD_PATH,
@@ -85,11 +85,25 @@ gulp.task('minify:css', () => options.MINIFY_CSS && gulp
   .pipe(cssmin())
   .pipe(gulp.dest(`${options.BUILD_PATH}/assets/css`)));
 
-gulp.task('build', () => {
-  runSequence(
-    'clean',
-    'copy',
-    'minify:js',
-    'minify:css',
-  );
-});
+gulp.task('build', gulp.series(
+  'clean',
+  'copy',
+  'minify:js',
+  'minify:css',
+));
+
+gulp.task('imagemin', () => gulp
+  .src(`${options.PUBLIC_PATH}/assets/img/*`)
+  .pipe(imagemin([
+    pngquant('65-80'),
+    mozjpeg({
+      quality: 85,
+      progressive: true,
+    }),
+    imagemin.svgo(),
+    imagemin.optipng(),
+    imagemin.gifsicle(),
+  ], {
+    verbose: true,
+  }))
+  .pipe(gulp.dest(`${options.BUILD_PATH}/assets/img`)));
