@@ -105,8 +105,7 @@ gulp.task('scss', () => gulp.src(`${options.SRC_PATH}/scss/entries/**/*.scss`)
 // 各種アセットファイルの変更を監視する
 gulp.task('watch', () => {
   gulp.watch([`${options.PUBLIC_PATH}/**/*.html`], gulp.task('html:reload'));
-  gulp.watch([`${options.SRC_PATH}/js/**/*.js`], gulp.task('js'));
-  gulp.watch([`${options.SRC_PATH}/js/**/*.js`], gulp.task('js:reload'));
+  gulp.watch([`${options.SRC_PATH}/js/**/*.js`], gulp.series('js', 'js:reload'));
   gulp.watch([`${options.SRC_PATH}/scss/**/*.scss`], gulp.task('scss'));
   browserSync.init(options.BROWSERSYNC);
 });
