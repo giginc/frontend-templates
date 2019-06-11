@@ -89,7 +89,7 @@ gulp.task('js', () => gulp.src(`${options.SRC_PATH}/js/entries/**/*.js`)
   .pipe(gulp.dest(`${options.PUBLIC_PATH}/assets/js`)));
 
 // JSファイルが変更されたブラウザをリロードする
-gulp.task('js:reload', gulp.series('js'), (done) => {
+gulp.task('js:reload', (done) => {
   browserSync.reload();
   done();
 });
@@ -104,7 +104,8 @@ gulp.task('scss', () => gulp.src(`${options.SRC_PATH}/scss/entries/**/*.scss`)
 
 // 各種アセットファイルの変更を監視する
 gulp.task('watch', () => {
-  gulp.watch([`${options.SRC_PATH}/**/*.html`], gulp.task('html:reload'));
+  gulp.watch([`${options.PUBLIC_PATH}/**/*.html`], gulp.task('html:reload'));
+  gulp.watch([`${options.SRC_PATH}/js/**/*.js`], gulp.task('js'));
   gulp.watch([`${options.SRC_PATH}/js/**/*.js`], gulp.task('js:reload'));
   gulp.watch([`${options.SRC_PATH}/scss/**/*.scss`], gulp.task('scss'));
   browserSync.init(options.BROWSERSYNC);
