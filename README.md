@@ -39,7 +39,8 @@ $ npm run build
 A. `public`配下に.htmlを追加・編集してください。
 
 **Q. JSファイルの名前を変更したり追加したい！**  
-A. `src/js/entries`配下のjsファイルを編集・追加した後、`webpack.config.js`の`entry`項目を編集してください。
+A. `src/js/entries`配下のjsファイルを編集・追加した後、
+`npm run dev`し直してローカルサーバーを再起動させてください。
 
 **Q. CSSファイルの名前を変更したり追加したい！**  
 A. `src/scss/entries`配下のscssファイルを編集・追加してください。
