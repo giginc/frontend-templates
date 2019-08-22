@@ -1,15 +1,16 @@
-const path = require("path");
-const glob = require("glob");
+const path = require('path');
+const glob = require('glob');
+
 const entries = {};
-const srcDir = "./src/js/entries"
+const srcDir = './src/js/entries';
 
 glob.sync('**/*.js', {
   ignore: '**/_*.js',
-  cwd: srcDir
+  cwd: srcDir,
 }).map((value) => {
   entries[value] = path.resolve(srcDir, value);
+  return entries;
 });
-
 
 module.exports = {
   entry: entries,
@@ -24,6 +25,6 @@ module.exports = {
       test: /\.js$/,
       loader: ['babel-loader'],
       exclude: /node_modules/,
-    }, ],
+    }],
   },
 };
