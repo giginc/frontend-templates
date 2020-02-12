@@ -4,7 +4,8 @@ GIG inc のフロントエンド用テンプレートです。
 
 ## ダウンロード
 
-[https://github.com/giginc/frontend-templates/archive/master.zip](https://github.com/giginc/frontend-templates/archive/master.zip)
+- [スタンダード版](https://github.com/giginc/frontend-templates/archive/master.zip)
+- [EJS版](https://github.com/giginc/frontend-templates/archive/template/ejs.zip)
 
 ## 特徴
 
