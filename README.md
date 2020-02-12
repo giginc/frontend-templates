@@ -2,6 +2,10 @@
 
 GIG inc のフロントエンド用テンプレートです。
 
+## ダウンロード
+
+[https://github.com/giginc/frontend-templates/archive/master.zip](https://github.com/giginc/frontend-templates/archive/master.zip)
+
 ## 特徴
 
 - 必要最低限の構成
