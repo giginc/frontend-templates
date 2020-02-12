@@ -152,8 +152,16 @@ gulp.task('watch', () => {
   browserSync.init(options.BROWSERSYNC);
 });
 
+// HTML, CSS, JSディレクトリを削除
+gulp.task('clean:assets', () => del([
+  `${options.PUBLIC_PATH}/**/*.html`,
+  `${options.PUBLIC_PATH}/assets/js`,
+  `${options.PUBLIC_PATH}/assets/css`,
+]));
+
 // 初期化用
 gulp.task('default', gulp.series(
+  'clean:assets',
   'ejs',
   'scss',
   'js',
@@ -170,7 +178,7 @@ gulp.task('default', gulp.series(
 //
 
 // 既存の`dist`ディレクトリを削除する
-gulp.task('clean', () => del([
+gulp.task('clean:dist', () => del([
   options.BUILD_PATH,
 ]));
 
@@ -205,7 +213,7 @@ gulp.task('minify:img', () => options.MINIFY_IMG && gulp
 
 // 初期化用
 gulp.task('build', gulp.series(
-  'clean',
+  'clean:dist',
   'copy',
   'minify:js',
   'minify:css',
