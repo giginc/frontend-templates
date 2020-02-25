@@ -1,8 +1,8 @@
-class Top {
+class Amp {
   static sayHello() {
     /* eslint-disable no-console */
-    console.log('hello, top');
+    console.log('hello, amp');
   }
 }
 
-Top.sayHello();
+Amp.sayHello();

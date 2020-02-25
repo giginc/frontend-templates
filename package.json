@@ -34,6 +34,7 @@
     "gulp-eslint": "^5.0.0",
     "gulp-imagemin": "^6.0.0",
     "gulp-plumber": "^1.2.0",
+    "gulp-replace": "^1.0.0",
     "gulp-sass": "^4.0.2",
     "gulp-sass-glob": "^1.0.9",
     "imagemin-mozjpeg": "^8.0.0",

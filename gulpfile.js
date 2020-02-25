@@ -1,7 +1,9 @@
 // モジュールの読み込み
 const gulp = require('gulp');
 const del = require('del');
+const fs = require('fs');
 const plumber = require('gulp-plumber');
+const replace = require('gulp-replace');
 const sass = require('gulp-sass');
 const sassGlob = require('gulp-sass-glob');
 const autoprefixer = require('gulp-autoprefixer');
@@ -67,6 +69,9 @@ const options = {
 
   // ビルド時に画像を圧縮する
   MINIFY_IMG: true,
+
+  // AMP用CSSのファイル名
+  AMP_CSS_FILENAME: 'amp.css',
 };
 
 
@@ -166,11 +171,24 @@ gulp.task('minify:img', () => options.MINIFY_IMG && gulp
   }))
   .pipe(gulp.dest(`${options.BUILD_PATH}/assets/img`)));
 
+// AMP用にcssファイルをインラインに展開する
+gulp.task('replace:amp', () => gulp
+  .src(`${options.BUILD_PATH}/*.html`)
+  .pipe(replace(
+    `<link rel="stylesheet" href="/assets/css/${options.AMP_CSS_FILENAME}">`,
+    `<style amp-custom>${fs.readFileSync(`${options.BUILD_PATH}/assets/css/${options.AMP_CSS_FILENAME}`, 'utf8')}</style>`,
+  ))
+  .pipe(gulp.dest(`${options.BUILD_PATH}/`)));
+
 // 初期化用
 gulp.task('build', gulp.series(
+  'clean:assets',
+  'scss',
+  'js',
   'clean:dist',
   'copy',
   'minify:js',
   'minify:css',
   'minify:img',
+  'replace:amp',
 ));
