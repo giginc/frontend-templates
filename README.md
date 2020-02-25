@@ -5,7 +5,7 @@ GIG inc のフロントエンド用テンプレートです。
 ## ダウンロード
 
 - [スタンダード版](https://github.com/giginc/frontend-templates/archive/master.zip)
-- [スタンダード版 (AMP)](https://github.com/giginc/frontend-templates/archive/amp.zip)
+- [スタンダード版 (AMP)](https://github.com/giginc/frontend-templates/archive/template/amp.zip)
 - [EJS版](https://github.com/giginc/frontend-templates/archive/template/ejs.zip)
 - [Pug版 (非推奨)](https://github.com/giginc/frontend-templates/archive/template/pug.zip)
 
