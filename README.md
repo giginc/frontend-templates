@@ -1,18 +1,16 @@
 # frontend-templates
 
-GIG inc のフロントエンド用テンプレートです。
+GIG inc のフロントエンド用テンプレート（AMP）です。
 
 ## ダウンロード
 
-- [スタンダード版](https://github.com/giginc/frontend-templates/archive/master.zip)
-- [EJS版](https://github.com/giginc/frontend-templates/archive/template/ejs.zip)
-- [Pug版（非推奨）](https://github.com/giginc/frontend-templates/archive/template/pug.zip)
+- [ここからダウンロード](https://github.com/giginc/frontend-templates/archive/template/amp.zip)
 
 ## 特徴
 
+- AMPのボイラープレート実装済み
 - 必要最低限の構成
-- css, jsファイルはページごとに管理・出力
-- eslintによるコード矯正
+- 開発時はscssファイルを編集可能、ビルド時にインラインスタイルに自動書き換え
 
 ## 構成
 
@@ -38,6 +36,10 @@ $ npm run dev
 ```
 $ npm run build
 ```
+
+## 注意事項
+
+`<link rel="stylesheet" href="/assets/css/amp.css">`のパスを変更した場合は、`gulpfile.js`の`options.AMP_CSS_FILENAME`を編集してください。
 
 ## よくある質問
 
