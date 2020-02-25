@@ -213,6 +213,10 @@ gulp.task('minify:img', () => options.MINIFY_IMG && gulp
 
 // 初期化用
 gulp.task('build', gulp.series(
+  'clean:assets',
+  'ejs',
+  'scss',
+  'js',
   'clean:dist',
   'copy',
   'minify:js',
